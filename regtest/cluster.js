@@ -4,16 +4,16 @@ var path = require('path');
 var async = require('async');
 var spawn = require('child_process').spawn;
 
-var BitcoinRPC = require('litecoind-rpc');
+var BitcoinRPC = require('@owstack/bitcoind-rpc');
 var rimraf = require('rimraf');
-var bitcore = require('litecore-lib');
+var ltcLib = require('@owstack/btc-lib');
 var chai = require('chai');
 var should = chai.should();
 
 var index = require('..');
 var log = index.log;
 log.debug = function() {};
-var BitcoreNode = index.Node;
+var BtcNode = index.Node;
 var BitcoinService = index.services.Bitcoin;
 
 describe('Bitcoin Cluster', function() {
@@ -133,10 +133,10 @@ describe('Bitcoin Cluster', function() {
       ]
     };
 
-    var regtest = bitcore.Networks.get('regtest');
+    var regtest = ltcLib.Networks.get('regtest');
     should.exist(regtest);
 
-    node = new BitcoreNode(configuration);
+    node = new BtcNode(configuration);
 
     node.on('error', function(err) {
       log.error(err);

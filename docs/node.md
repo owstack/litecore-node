@@ -14,7 +14,7 @@ A node represents a collection of services that are loaded together. For more in
 
 ```js
 
-var index = require('litecore-node');
+var index = require('ltc-node');
 var Bitcoin = index.services.Bitcoin;
 var Node = index.Node;
 

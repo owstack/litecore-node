@@ -10,11 +10,11 @@ nvm install v4
 
 ## Fork and Download Repositories
 
-To develop litecore-node:
+To develop ltc-node:
 
 ```bash
 cd ~
-git clone git@github.com:<yourusername>/litecore-node.git
+git clone git@github.com:<yourusername>/ltc-node.git
 git clone git@github.com:<yourusername>/litecore-lib.git
 ```
 
@@ -48,13 +48,13 @@ brew install zeromq
 ```bash
 cd litecore-lib
 npm install
-cd ../litecore-node
+cd ../ltc-node
 npm install
 ```
 **Note**: If you get a message about not being able to download litecoin distribution, you'll need to compile litecoind from source, and setup your configuration to use that version.
 
 
-We now will setup symlinks in `litecore-node` *(repeat this for any other modules you're planning on developing)*:
+We now will setup symlinks in `ltc-node` *(repeat this for any other modules you're planning on developing)*:
 ```bash
 cd node_modules
 rm -rf litecore-lib
@@ -78,7 +78,7 @@ npm install mocha -g
 
 To run all test suites:
 ```bash
-cd litecore-node
+cd ltc-node
 npm run regtest
 npm run test
 ```
@@ -102,11 +102,11 @@ cd ~
 mkdir devnode
 cd devnode
 mkdir node_modules
-touch litecore-node.json
+touch ltc-node.json
 touch package.json
 ```
 
-Edit `litecore-node.json` with something similar to:
+Edit `ltc-node.json` with something similar to:
 ```json
 {
   "network": "livenet",
@@ -136,7 +136,7 @@ Setup symlinks for all of the services and dependencies:
 ```bash
 cd node_modules
 ln -s ~/litecore-lib
-ln -s ~/litecore-node
+ln -s ~/ltc-node
 ln -s ~/insight-api
 ln -s ~/insight-ui
 ```
@@ -158,5 +158,5 @@ rpcpassword=local321
 
 From within the `devnode` directory with the configuration file, start the node:
 ```bash
-../litecore-node/bin/litecore-node start
+../ltc-node/bin/ltc-node start
 ```

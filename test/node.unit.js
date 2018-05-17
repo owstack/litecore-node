@@ -2,15 +2,15 @@
 
 var should = require('chai').should();
 var sinon = require('sinon');
-var bitcore = require('litecore-lib');
-var Networks = bitcore.Networks;
+var ltcLib = require('@owstack/ltc-lib');
+var Networks = ltcLib.Networks;
 var proxyquire = require('proxyquire');
 var util = require('util');
 var BaseService = require('../lib/service');
 var index = require('../lib');
 var log = index.log;
 
-describe('Bitcore Node', function() {
+describe('Ltc Node', function() {
 
   var baseConfig = {};
 
@@ -195,24 +195,28 @@ describe('Bitcore Node', function() {
       node._unloadedServices = [
         {
           name: 'chain',
+          moduleName: 'chain',
           module: {
             dependencies: ['db']
           }
         },
         {
           name: 'db',
+          moduleName: 'db',
           module: {
             dependencies: ['daemon', 'p2p']
           }
         },
         {
           name:'daemon',
+          moduleName: 'daemon',
           module: {
             dependencies: []
           }
         },
         {
           name: 'p2p',
+          moduleName: 'p2p',
           module: {
             dependencies: []
           }
@@ -425,7 +429,7 @@ describe('Bitcore Node', function() {
 
   describe('#getNetworkName', function() {
     afterEach(function() {
-      bitcore.Networks.disableRegtest();
+      ltcLib.Networks.disableRegtest();
     });
     it('it will return the network name for livenet', function() {
       var node = new Node(baseConfig);

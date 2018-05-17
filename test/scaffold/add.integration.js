@@ -25,7 +25,7 @@ describe('#add', function() {
         throw err;
       }
       fs.writeFile(
-        testDir + '/s0/s1/litecore-node.json',
+        testDir + '/s0/s1/ltc-node.json',
         JSON.stringify(startConfig),
         function(err) {
           if (err) {
@@ -90,12 +90,12 @@ describe('#add', function() {
       });
     });
 
-    it('will update litecore-node.json services', function(done) {
+    it('will update ltc-node.json services', function(done) {
       var callCount = 0;
       var oldPackage = {
         dependencies: {
           'litecore-lib': '^v0.1.0',
-          'litecore-node': '^v0.2.0'
+          'ltc-node': '^v0.2.0'
         }
       };
       var spawn = sinon.stub().returns({
@@ -130,7 +130,7 @@ describe('#add', function() {
         services: ['a', 'b', 'c']
       }, function(err) {
         should.not.exist(err);
-        var configPath = path.resolve(testDir, 's0/s1/litecore-node.json');
+        var configPath = path.resolve(testDir, 's0/s1/ltc-node.json');
         var config = JSON.parse(fs.readFileSync(configPath));
         config.services.should.deep.equal(['a','b','c']);
         done();

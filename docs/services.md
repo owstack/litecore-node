@@ -5,7 +5,7 @@ Bitcore Node has a service module system that can start up additional services t
 - HTTP routes
 - Event types to publish and subscribe
 
-The `litecore-node.json` file describes which services will load for a node:
+The `ltc-node.json` file describes which services will load for a node:
 
 ```json
 {
@@ -21,20 +21,20 @@ Services correspond with a Node.js module as described in 'package.json', for ex
 {
   "dependencies": {
     "litecore-lib": "^0.1.0",
-    "litecore-node": "^0.2.0",
+    "ltc-node": "^0.2.0",
     "insight-api": "^3.0.0"
   }
 }
 ```
 
-_Note:_ If you already have a litecore-node database, and you want to query data from previous blocks in the blockchain, you will need to reindex. Reindexing right now means deleting your litecore-node database and resyncing.
+_Note:_ If you already have a ltc-node database, and you want to query data from previous blocks in the blockchain, you will need to reindex. Reindexing right now means deleting your ltc-node database and resyncing.
 
 ## Using Services Programmatically
 If, instead, you would like to run a custom node, you can include services by including them in your configuration object when initializing a new node.
 
 ```js
 //Require litecore
-var litecore = require('litecore-node');
+var litecore = require('ltc-node');
 
 //Services
 var Bitcoin = litecore.services.Bitcoin;
@@ -49,7 +49,7 @@ var myNode = new litecore.Node({
       config: {
         spawn: {
           datadir: '/home/<username>/.litecoin',
-          exec: '/home/<username>/litecore-node/bin/litecoind'
+          exec: '/home/<username>/ltc-node/bin/litecoind'
         }
       }
     },
@@ -82,7 +82,7 @@ A new service can be created by inheriting from `Node.Service` and implementing 
 - `Service.prototype.getPublishEvents()` - Describes which events can be subscribed to for this service, useful to subscribe to events over the included web socket API.
 - `Service.prototype.setupRoutes()` - A service can extend HTTP routes on an express application by implementing this method.
 
-The `package.json` for the service module can either export the `Node.Service` directly, or specify a specific module to load by including `"litecoreNode": "lib/litecore-node.js"`.
+The `package.json` for the service module can either export the `Node.Service` directly, or specify a specific module to load by including `"litecoreNode": "lib/ltc-node.js"`.
 
 Please take a look at some of the existing services for implementation specifics.
 

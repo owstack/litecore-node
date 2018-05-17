@@ -3,10 +3,10 @@
 var should = require('chai').should();
 
 describe('Index Exports', function() {
-  it('will export litecore-lib', function() {
-    var bitcore = require('../');
-    should.exist(bitcore.lib);
-    should.exist(bitcore.lib.Transaction);
-    should.exist(bitcore.lib.Block);
+  it('will export ltc-lib', function() {
+    var ltcLib = require('../');
+    should.exist(ltcLib.lib);
+    should.exist(ltcLib.lib.Transaction);
+    should.exist(ltcLib.lib.Block);
   });
 });

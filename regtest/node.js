@@ -9,16 +9,16 @@ var log = index.log;
 log.debug = function() {};
 
 var chai = require('chai');
-var bitcore = require('litecore-lib');
+var ltcLib = require('@owstack/ltc-lib');
 var rimraf = require('rimraf');
 var node;
 
 var should = chai.should();
 
-var BitcoinRPC = require('litecoind-rpc');
+var BitcoinRPC = require('@owstack/bitcoind-rpc');
 var index = require('..');
-var Transaction = bitcore.Transaction;
-var BitcoreNode = index.Node;
+var Transaction = ltcLib.Transaction;
+var BtcNode = index.Node;
 var BitcoinService = index.services.Bitcoin;
 var testWIF = 'cSdkPxkAjA4HDr5VHgsebAPDEh9Gyub4HK8UJr2DFGGqKKy4K5sG';
 var testKey;
@@ -36,7 +36,7 @@ describe('Node Functionality', function() {
 
     var datadir = __dirname + '/data';
 
-    testKey = bitcore.PrivateKey(testWIF);
+    testKey = ltcLib.PrivateKey(testWIF);
 
     rimraf(datadir + '/regtest', function(err) {
 
@@ -60,9 +60,9 @@ describe('Node Functionality', function() {
         ]
       };
 
-      node = new BitcoreNode(configuration);
+      node = new BtcNode(configuration);
 
-      regtest = bitcore.Networks.get('regtest');
+      regtest = ltcLib.Networks.get('regtest');
       should.exist(regtest);
 
       node.on('error', function(err) {
@@ -660,7 +660,7 @@ describe('Node Functionality', function() {
       });
 
       it('will update the mempool index after new tx', function(done) {
-        var memAddress = bitcore.PrivateKey().toAddress(node.network).toString();
+        var memAddress = ltcLib.PrivateKey().toAddress(node.network).toString();
         var tx = new Transaction();
         tx.from(unspentOutput);
         tx.to(memAddress, unspentOutput.satoshis - 40000); // TODO: only 90000 satoshis available, better fee?

@@ -6,13 +6,13 @@ var path = require('path');
 var index = require('..');
 var log = index.log;
 
-var p2p = require('litecore-p2p');
+var p2p = require('@owstack/btc-p2p');
 var Peer = p2p.Peer;
 var Messages = p2p.Messages;
 var chai = require('chai');
-var bitcore = require('litecore-lib');
-var Transaction = bitcore.Transaction;
-var BN = bitcore.crypto.BN;
+var ltcLib = require('@owstack/ltc-lib');
+var Transaction = ltcLib.Transaction;
+var BN = ltcLib.crypto.BN;
 var async = require('async');
 var rimraf = require('rimraf');
 var bitcoind;
@@ -21,7 +21,7 @@ var bitcoind;
 var should = chai.should();
 var assert = chai.assert;
 var sinon = require('sinon');
-var BitcoinRPC = require('litecoind-rpc');
+var BitcoinRPC = require('@owstack/bitcoind-rpc');
 var transactionData = [];
 var blockHashes = [];
 var txs = [];
@@ -29,9 +29,9 @@ var client;
 var messages;
 var peer;
 var coinbasePrivateKey;
-var privateKey = bitcore.PrivateKey();
-var destKey = bitcore.PrivateKey();
-var BufferUtil = bitcore.util.buffer;
+var privateKey = ltcLib.PrivateKey();
+var destKey = ltcLib.PrivateKey();
+var BufferUtil = ltcLib.util.buffer;
 var blocks;
 
 describe('P2P Functionality', function() {
@@ -40,8 +40,8 @@ describe('P2P Functionality', function() {
     this.timeout(100000);
 
     // enable regtest
-    bitcore.Networks.enableRegtest();
-    var regtestNetwork = bitcore.Networks.get('regtest');
+    ltcLib.Networks.enableRegtest();
+    var regtestNetwork = ltcLib.Networks.get('regtest');
     var datadir = __dirname + '/data';
 
     rimraf(datadir + '/regtest', function(err) {
@@ -55,7 +55,7 @@ describe('P2P Functionality', function() {
           exec: path.resolve(__dirname, '../bin/litecoind')
         },
         node: {
-          network: bitcore.Networks.testnet
+          network: ltcLib.Networks.testnet
         }
       });
 
@@ -130,11 +130,11 @@ describe('P2P Functionality', function() {
                         throw err;
                       }
                       utxo.privateKeyWIF = privresponse.result;
-                      var tx = bitcore.Transaction();
+                      var tx = ltcLib.Transaction();
                       tx.from(utxo);
                       tx.change(privateKey.toAddress());
                       tx.to(destKey.toAddress(), utxo.amount * 1e8 - 100000);
-                      tx.sign(bitcore.PrivateKey.fromWIF(utxo.privateKeyWIF));
+                      tx.sign(ltcLib.PrivateKey.fromWIF(utxo.privateKeyWIF));
                       txs.push(tx);
                       finished();
                     });
