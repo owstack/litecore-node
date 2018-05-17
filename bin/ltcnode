@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-var litecore = require('../lib/cli/btcnode');
+var litecore = require('../lib/cli/ltcnode');
 litecore();
