@@ -99,7 +99,7 @@ describe('#start', function() {
         } else if (p === 'local/package.json') {
           return {
             name: 'local',
-            btcNode: 'lib/ltcNode.js'
+            ltcNode: 'lib/ltcNode.js'
           };
         } else if (p === 'local/lib/ltcNode.js') {
           return LocalService;
