@@ -25,14 +25,14 @@ WORKDIR $PKG_DIR
 RUN chown -R ows:ows $HOME_PATH && chgrp ows /usr/local/lib/node_modules && chgrp ows /usr/local/bin
 
 USER ows
-RUN npm install -g @owstack/ltc-node@0.0.3
+RUN npm install -g @owstack/ltc-node@0.0.4
 
 WORKDIR $HOME_PATH
 RUN $PKG_NAME create -d $BITCOIN_DATA $APP_NAME
 
 WORKDIR $APP_DIR
-RUN $PKG_NAME install @owstack/ltc-explorer-api@0.0.1
-RUN $PKG_NAME install @owstack/ltc-wallet-service@0.0.2
+RUN $PKG_NAME install @owstack/ltc-explorer-api@0.0.2
+RUN $PKG_NAME install @owstack/ltc-wallet-service@0.0.3
 RUN $PKG_NAME install @owstack/ows-explorer@0.0.3
 
 USER root
