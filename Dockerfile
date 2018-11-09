@@ -1,4 +1,4 @@
-FROM node:8.9
+FROM node:8
 
 # update apt-get
 RUN apt-get update && apt-get install -y dnsutils
@@ -25,15 +25,15 @@ WORKDIR $PKG_DIR
 RUN chown -R ows:ows $HOME_PATH && chgrp ows /usr/local/lib/node_modules && chgrp ows /usr/local/bin
 
 USER ows
-RUN npm install -g @owstack/ltc-node@0.1.0
+RUN npm install -g @owstack/ltc-node@0.1.1
 
 WORKDIR $HOME_PATH
 RUN $PKG_NAME create -d $BITCOIN_DATA $APP_NAME
 
 WORKDIR $APP_DIR
 RUN $PKG_NAME install @owstack/ltc-explorer-api@0.0.5
-RUN $PKG_NAME install @owstack/ltc-wallet-service@0.0.6
-RUN $PKG_NAME install @owstack/ows-explorer@0.0.3
+RUN $PKG_NAME install @owstack/ltc-wallet-service@0.0.7
+RUN $PKG_NAME install @owstack/ows-explorer@0.0.4
 
 USER root
 CMD ["ltcnode","start"]
